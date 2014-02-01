@@ -1,7 +1,7 @@
 
-# proxies-proxyipchecker
+# proxies-publicproxyservers
 
-  Scrapes the public proxies list from [proxyipchecker.com](http://proxyipchecker.com/). Primarily used as a proxies source list to [proxies](https://github.com/ivolo/proxies).
+  Scrapes the public proxies list from [publicproxyservers.com](http://publicproxyservers.com/). Primarily used as a proxies source list to [proxies](https://github.com/ivolo/proxies).
 
 
 ## Example
@@ -10,12 +10,12 @@ Get a list of public proxies:
 
 ```js
 var Scraper = require('scraper');
-var ProxyIpChecker = require('proxies-proxyipchecker');
+var PubilcProxyServers = require('proxies-publicproxyservers');
 var Proxies = require('proxies');
 
 Scraper(function (err, scraper) {
-  var proxyipchecker = ProxyIpChecker(scraper);
-  proxyipchecker(function (err, proxies) {
+  var publicproxyservers = PubilcProxyServers(scraper);
+  publicproxyservers(function (err, proxies) {
     // a list of proxies
   });
 });
@@ -25,13 +25,13 @@ And integrate into [proxies](https://github.com/ivolo/proxies) as a source:
 
 ```js
 var Scraper = require('scraper');
-var ProxyIpChecker = require('proxies-proxyipchecker');
+var PublicProxyServers = require('proxies-publicproxyservers');
 var Proxies = require('proxies');
 
 Scraper(function (err, scraper) {
-  var proxyipchecker = ProxyIpChecker(scraper);
+  var publicproxyservers = PublicProxyServers(scraper);
   var proxies = Proxies()
-    .source(proxyipchecker);
+    .source(publicproxyservers);
 
   // use proxies
 });
@@ -39,11 +39,11 @@ Scraper(function (err, scraper) {
 
 ## API
 
-#### ProxyIpChecker(scraper)
+#### PublicProxyServers(scraper)
 
-  Create a new ProxyIpChecker `scraper` instance.
+  Create a new PublicProxyServers `scraper` instance.
 
-#### proxyipchecker(callback)
+#### publicproxyservers(callback)
 
   Get a list of public proxies.
 

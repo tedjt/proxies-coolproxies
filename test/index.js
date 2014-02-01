@@ -1,6 +1,6 @@
 
 var assert = require('assert');
-var ProxyIPChecker = require('..');
+var PublicProxyServers = require('..');
 var Scraper = require('scraper');
 
 describe('linkedin-scraper', function () {
@@ -10,7 +10,7 @@ describe('linkedin-scraper', function () {
     var self = this;
     Scraper(function (err, scraper) {
       if (err) return done(err);
-      self.proxies = ProxyIPChecker(scraper);
+      self.proxies = PublicProxyServers(scraper);
       done();
     });
   });

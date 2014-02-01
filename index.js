@@ -6,14 +6,16 @@
 module.exports = scrape;
 
 /**
- * Return a Proxy IP Checker site scraper.
+ * Return a PublicProxyServers site scraper.
  *
  * @param {Scraper} scraper
  * @return {Function}
  */
+var SORTED_URL = 'http://www.publicproxyservers.com/proxy/list_avr_time1.html';
 function scrape (scraper) {
   return function (callback) {
-    scraper.readyPage('http://proxyipchecker.com/', function (err, page) {
+
+    scraper.readyPage(SORTED_URL, function (err, page) {
       if (err) {
         page.close();
         callback(err);
@@ -38,19 +40,13 @@ function parseList (page, callback) {
 
   page.evaluate(function () {
     var proxies = [];
-
-    $('.freshproxies').find('li').each(function (index, el) {
-      var text = el.innerText;
-      var tokens = text.split(':');
-      if (tokens.length === 2) {
-        var ip = tokens[0].trim();
-        var port = parseInt(tokens[1], 10);
-        proxies.push('http://' + ip + ':' + port);
-      }
+    $('table.proxy-list tr td.first').each(function(index, val) {
+      var server = $(val).text();
+      // no port.
+      proxies.push('http://' + server);
     });
 
     return proxies;
-
   }, function (proxies) {
     return callback(null, proxies);
   });

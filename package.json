@@ -1,13 +1,13 @@
 {
-  "name": "proxies-proxyipchecker",
+  "name": "proxies-publicproxyservers",
   "version": "1.0.0",
-  "repository": "git://github.com/ivolo/proxies-proxyipchecker.git",
-  "description": "A proxies scraper for proxyipchecker.com",
+  "repository": "git://github.com/tedjt/proxies-publicproxyservers.git",
+  "description": "A proxies scraper for publicproxyservers.com",
   "keywords": [
     "public",
     "proxies",
     "source",
-    "proxyipchecker",
+    "publicproxyservers",
     "scraper"
   ],
   "dependencies": {
