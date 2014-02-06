@@ -1,49 +1,45 @@
 
-# proxies-publicproxyservers
+# proxies-coolproxies
 
-  Scrapes the public proxies list from [publicproxyservers.com](http://publicproxyservers.com/). Primarily used as a proxies source list to [proxies](https://github.com/ivolo/proxies).
+  Scrapes the private proxies list from [coolproxies.com](http://coolproxies.com/). Primarily used as a proxies source list to [proxies](https://github.com/ivolo/proxies).
 
 
 ## Example
 
-Get a list of public proxies:
+Get a list of private proxies:
 
 ```js
-var Scraper = require('scraper');
-var PubilcProxyServers = require('proxies-publicproxyservers');
+var Coolproxies = require('proxies-coolproxies');
 var Proxies = require('proxies');
 
-Scraper(function (err, scraper) {
-  var publicproxyservers = PubilcProxyServers(scraper);
-  publicproxyservers(function (err, proxies) {
-    // a list of proxies
-  });
+var key = 'SOME_KEY';
+var coolproxies = Coolproxies(key);
+coolproxies(function (err, proxies) {
+  // a list of proxies
 });
 ```
 
 And integrate into [proxies](https://github.com/ivolo/proxies) as a source:
 
 ```js
-var Scraper = require('scraper');
-var PublicProxyServers = require('proxies-publicproxyservers');
+var coolproxies = require('proxies-coolproxies');
 var Proxies = require('proxies');
 
-Scraper(function (err, scraper) {
-  var publicproxyservers = PublicProxyServers(scraper);
-  var proxies = Proxies()
-    .source(publicproxyservers);
+var key = '<SOME_KEY>';
+var coolproxies = coolproxies(key);
+var proxies = Proxies()
+  .source(coolproxies);
 
-  // use proxies
-});
+// use proxies
 ```
 
 ## API
 
-#### PublicProxyServers(scraper)
+#### coolproxies(key)
 
-  Create a new PublicProxyServers `scraper` instance.
+  Create a new coolproxies instance with the specified api key.
 
-#### publicproxyservers(callback)
+#### coolproxies(callback)
 
   Get a list of public proxies.
 

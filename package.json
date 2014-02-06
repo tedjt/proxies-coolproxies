@@ -1,17 +1,16 @@
 {
-  "name": "proxies-publicproxyservers",
+  "name": "proxies-coolproxies",
   "version": "1.0.0",
-  "repository": "git://github.com/tedjt/proxies-publicproxyservers.git",
-  "description": "A proxies scraper for publicproxyservers.com",
+  "repository": "git://github.com/tedjt/proxies-coolproxies.git",
+  "description": "A proxies scraper for coolproxies.com",
   "keywords": [
     "public",
     "proxies",
     "source",
-    "publicproxyservers",
-    "scraper"
+    "coolproxies"
   ],
   "dependencies": {
-    "scraper": "git://github.com/ivolo/scraper"
+    "request": "~2.33.0"
   },
   "devDependencies": {
     "mocha": "~1.15.1"

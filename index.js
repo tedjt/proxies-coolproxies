@@ -1,3 +1,4 @@
+var request = require('request');
 
 /**
  * Expose the `scrape`.
@@ -6,48 +7,39 @@
 module.exports = scrape;
 
 /**
- * Return a PublicProxyServers site scraper.
+ * Return a coolproxies site scraper.
  *
  * @param {Scraper} scraper
  * @return {Function}
  */
-var SORTED_URL = 'http://www.publicproxyservers.com/proxy/list_avr_time1.html';
-function scrape (scraper) {
+var FETCH_URL = 'http://api.coolproxies.com/api.php?list=1&speed=3&premium=1&userid=';
+function scrape (key) {
+  var url = FETCH_URL + encodeURIComponent(key);
   return function (callback) {
-
-    scraper.readyPage(SORTED_URL, function (err, page) {
-      if (err) {
-        page.close();
-        callback(err);
-      } else {
-        parseList(page, function (err, proxies) {
-          page.close();
-          callback(err, proxies);
+    console.log('querying url: ' + url);
+    request(url, function(err, res, body) {
+      if (err) return callback(err);
+      if (res.statusCode == 200) {
+        var proxies = body.split('\r\n');
+        proxies = proxies.filter(function(p) {
+          if(!checkIsIPV4(p.split(':')[0])) {
+            console.log('filtering %s', p);
+          }
+          return checkIsIPV4(p.split(':')[0]);
         });
+        return callback(null, proxies);
       }
+      callback(new Error('failed to fetch proxies: ' + res.statusCode));
     });
   };
 }
 
-/**
- * Parses the IP table list.
- *
- * @param {Page} page
- * @param {Function} callback
- */
-
-function parseList (page, callback) {
-
-  page.evaluate(function () {
-    var proxies = [];
-    $('table.proxy-list tr td.first').each(function(index, val) {
-      var server = $(val).text();
-      // no port.
-      proxies.push('http://' + server);
-    });
-
-    return proxies;
-  }, function (proxies) {
-    return callback(null, proxies);
-  });
+function checkIsIPV4(entry) {
+    var blocks = entry.split(".");
+      if(blocks.length === 4) {
+        return blocks.every(function(block) {
+          return parseInt(block,10) >=0 && parseInt(block,10) <= 255;
+        });
+      }
+    return false;
 }
