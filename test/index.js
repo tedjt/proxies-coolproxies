@@ -2,7 +2,7 @@
 var assert = require('assert');
 var Coolproxies = require('..');
 
-var testKey = 'somekey';
+var testKey = 'I-GRYT7R8KV3UX';// 'somekey';
 describe('proxies-coolproxies', function () {
   this.timeout(60000); // scarping can take a second
 
@@ -16,6 +16,7 @@ describe('proxies-coolproxies', function () {
       if (err) return done(err);
       assert(Array.isArray(proxies));
       assert(proxies.length);
+      console.log(proxies);
       done();
     });
   });

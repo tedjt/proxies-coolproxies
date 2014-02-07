@@ -26,6 +26,8 @@ function scrape (key) {
             console.log('filtering %s', p);
           }
           return checkIsIPV4(p.split(':')[0]);
+        }).map(function(p) {
+          return 'http://' + p;
         });
         return callback(null, proxies);
       }
